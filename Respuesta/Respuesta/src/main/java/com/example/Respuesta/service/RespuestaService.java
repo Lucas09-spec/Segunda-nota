@@ -2,6 +2,7 @@ package com.example.Respuesta.service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,17 +21,28 @@ public class RespuestaService {
     @Autowired
     private SoporteClient soporteClient;
 
-    public List<Respuesta> getRespuestas(){
+
+    
+
+    public List<Respuesta> findAll(){
         return respuestaRepository.findAll();
     }
 
-    public Respuesta saveRespuesta(Respuesta nuevoRespuesta){
+    public Optional<Respuesta> findById(Long id){
+        return  respuestaRepository.findById(id);
+    }
+
+    public Respuesta saveSoporte(Respuesta nuevoRespuesta){
+        //verificar si el cliente existe consultando al microservicio cliente
         Map<String,Object> soporte = soporteClient.getSoporteById(nuevoRespuesta.getSoporteId());
-        if (soporte == null || soporte.isEmpty()){
-            throw new RuntimeException("Soporte no encontrado.");
+        //verifico si me trajo el cliente o no
+        if(soporte == null || soporte.isEmpty()){
+            throw new RuntimeException("Cliente no encontrado. No se puede agregar el pedido");
         }
         return respuestaRepository.save(nuevoRespuesta);
+
     }
+
     public void delete(Long id) {
         respuestaRepository.deleteById(id);
     }

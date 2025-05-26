@@ -50,23 +50,23 @@ public class SoporteController {
     }
 
     @PutMapping("/{id}")
-public ResponseEntity<Soporte> updateSoporte(@PathVariable Long id, @RequestBody Soporte soporteActualizado) {
-    Optional<Soporte> soporteExistente = soporteService.findById(id);
+    public ResponseEntity<Soporte> updateSoporte(@PathVariable Long id, @RequestBody Soporte soporteActualizado) {
+        Optional<Soporte> soporteExistente = soporteService.findById(id);
 
-    if (soporteExistente.isEmpty()) {
-        return ResponseEntity.notFound().build();
+        if (soporteExistente.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // Asegurar que se mantenga el mismo ID
+        soporteActualizado.setId(id);
+
+        try {
+            Soporte soporteGuardado = soporteService.saveCategoria(soporteActualizado);
+            return ResponseEntity.ok(soporteGuardado);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(null);
+        }
     }
-
-    // Asegurar que se mantenga el mismo ID
-    soporteActualizado.setId(id);
-
-    try {
-        Soporte soporteGuardado = soporteService.saveCategoria(soporteActualizado);
-        return ResponseEntity.ok(soporteGuardado);
-    } catch (RuntimeException e) {
-        return ResponseEntity.badRequest().body(null);
-    }
-}
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSoporte(@PathVariable Long id) {
