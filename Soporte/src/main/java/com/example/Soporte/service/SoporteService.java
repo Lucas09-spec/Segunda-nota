@@ -29,7 +29,7 @@ public class SoporteService {
         return  soporteRepository.findById(id);
     }
 
-    public Soporte savePedido(Soporte nuevoSoporte){
+    public Soporte saveCategoria(Soporte nuevoSoporte){
         //verificar si el cliente existe consultando al microservicio cliente
         Map<String,Object> categoria = categoriaClient.getCategoriaById(nuevoSoporte.getCategoriaId());
         //verifico si me trajo el cliente o no
