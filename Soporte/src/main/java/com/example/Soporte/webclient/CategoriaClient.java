@@ -21,7 +21,7 @@ public class CategoriaClient {
         .retrieve()
         .onStatus(status -> status.is4xxClientError(), 
         response -> response.bodyToMono(String.class)
-        .map(body -> new RuntimeException("Cliente no encontrado")))
+        .map(body -> new RuntimeException("Categoria no encontrada")))
         .bodyToMono(Map.class).block();
     }
 }

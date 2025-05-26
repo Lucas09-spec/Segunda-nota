@@ -36,4 +36,7 @@ public class Soporte {
     @Column(nullable=false)
     private Long categoriaId;
     
+    @Column(nullable=false)
+    private Long estadoId;
+    
 }
