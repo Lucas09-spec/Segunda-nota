@@ -32,10 +32,11 @@ public class Usuario {
     @Column (nullable = false)
     private String apellido;
     @Column (nullable = false)
-    private String telefono; 
+    private String telefono;
 
     @Column(nullable = false)
     private Long rol;
-
+    @Column(nullable = false)
+    private Long direccionId;
 
 }
