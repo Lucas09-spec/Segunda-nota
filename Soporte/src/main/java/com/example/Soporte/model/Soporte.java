@@ -38,5 +38,8 @@ public class Soporte {
     
     @Column(nullable=false)
     private Long estadoId;
+
+    @Column(nullable=false)
+    private Long usuarioId;
     
 }

@@ -42,7 +42,7 @@ public class SoporteController {
     @PostMapping
     public ResponseEntity<Soporte> createSoporte(@RequestBody Soporte nuevoSoporte) {
         try {
-            Soporte soporteGuardado = soporteService.saveCategoria(nuevoSoporte);
+            Soporte soporteGuardado = soporteService.saveSoporte(nuevoSoporte);
             return ResponseEntity.ok(soporteGuardado);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(null);
@@ -61,7 +61,7 @@ public class SoporteController {
         soporteActualizado.setId(id);
 
         try {
-            Soporte soporteGuardado = soporteService.saveCategoria(soporteActualizado);
+            Soporte soporteGuardado = soporteService.saveSoporte(soporteActualizado);
             return ResponseEntity.ok(soporteGuardado);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(null);

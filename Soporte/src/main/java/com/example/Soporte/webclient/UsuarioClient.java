@@ -6,24 +6,22 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
-
 @Component
-public class CategoriaClient {
+public class UsuarioClient {
     private final WebClient webClient;
 
-    public CategoriaClient(@Value("${categoria-service.url}") String categoriaServiceUrl){
-        this.webClient = WebClient.builder().baseUrl(categoriaServiceUrl).build();
+    public UsuarioClient(@Value("${usuario-service.url}") String usuarioServiceUrl){
+        this.webClient = WebClient.builder().baseUrl(usuarioServiceUrl).build();
     }
 
-    public Map<String, Object> getCategoriaById(Long id){
+    public Map<String, Object> getUsuarioById(Long id){
         return this.webClient.get()
         .uri("/{id}", id)
         .retrieve()
         .onStatus(status -> status.is4xxClientError(), 
         response -> response.bodyToMono(String.class)
-        .map(body -> new RuntimeException("Categoria no encontrada")))
+        .map(body -> new RuntimeException("Estado no encontrado")))
         .bodyToMono(Map.class).block();
     }
 
-    
 }
