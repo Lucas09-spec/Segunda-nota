@@ -35,5 +35,14 @@ public class RolController {
         return ResponseEntity.ok(lista);
     }
 
+    @GetMapping("{/id}")
+    public ResponseEntity<RolModel> obtenerRolPorId(@PathVariable Long id){
+        RolModel rol = rolService.obtenerRolPorId(id);
+        if (rol == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(rol);
+    }
+
 
 }
