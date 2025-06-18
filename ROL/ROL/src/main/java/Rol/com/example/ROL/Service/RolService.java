@@ -25,6 +25,11 @@ public class RolService {
     }
 
 
+    public RolModel obtenerRolPorId(Long id){
+        return rolrepository.findById(id).orElse(null);
+    }
+
+
  
 
 }
